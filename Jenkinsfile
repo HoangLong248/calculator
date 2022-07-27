@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+         pollSCM("* * * * *")
+    }
     stages {
         stage ("Checkout") {
             steps {
@@ -16,12 +19,6 @@ pipeline {
         stage ("Unit test") {
             steps {
                 sh "./mvnw test"
-            }
-        }
-
-        stage ("Code coverage") {
-            steps {
-                sh "./mvnw package"
             }
         }
     }
